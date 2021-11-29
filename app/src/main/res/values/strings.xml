@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">CA2MobileApp</string>
+    <string name="app_name">Sonic Fan App</string>
+    <string name="textview">That\'s no Good</string>
 </resources>
