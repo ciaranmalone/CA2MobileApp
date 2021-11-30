@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.setTitle("Sonic fan app")
 
         binding.imageButton.setOnClickListener {
-            val intent = Intent(this, Game::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
         }
     }

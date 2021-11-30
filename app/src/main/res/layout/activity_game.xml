@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Game">
+    tools:context=".activities.GameActivity">
 
     <EditText
         android:id="@+id/scoreInputField"

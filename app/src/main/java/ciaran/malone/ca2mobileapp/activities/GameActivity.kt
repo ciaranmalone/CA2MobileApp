@@ -1,49 +1,50 @@
 package ciaran.malone.ca2mobileapp.activities
-
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ciaran.malone.ca2mobileapp.R
 import ciaran.malone.ca2mobileapp.databinding.ActivityGameBinding
+import ciaran.malone.ca2mobileapp.main.MainApp
 import ciaran.malone.ca2mobileapp.models.ScoreModel
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import timber.log.Timber
 import timber.log.Timber.i
 
 
-class Game : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGameBinding
 
-    var scoreBoard = ScoreModel()
+    var playerScore = ScoreModel()
+    lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.plant(Timber.DebugTree())
-        i("started")
+        app = application as MainApp
+
+        i("DEBUG_MESSAGE -> GAME STARED")
 
         binding.submitScoreButton.setOnClickListener {
-            i("BUTTON PRESSED")
+            i("DEBUG_MESSAGE -> BUTTON PRESSED")
 
             val scoreText = binding.scoreInputField.text.toString()
             val nameText = binding.nameInputField.text.toString()
             if (scoreText.isNotEmpty() and nameText.isNotEmpty() ) {
-                scoreBoard.Score = scoreText
-                scoreBoard.Name = nameText
-                scoreBoard.Date = getDate()
+                playerScore.Score = scoreText
+                playerScore.Name = nameText
+                playerScore.Date = getDate()
 
-                i("Added :  $scoreBoard")
+                app.scoreBoard.add(playerScore.copy())
+
+                val intent = Intent(this, ScoreBoardActivity::class.java)
+                startActivity(intent)
+                i("DEBUG_MESSAGE -> Added :  $playerScore")
             }
             else {
-                i("WRONG WRONG WRONG")
-
-
+                i("DEBUG_MESSAGE -> WRONG WRONG WRONG")
                 Snackbar
                     .make(it, "YOu gotta Enter Somthing", Snackbar.LENGTH_LONG)
                     .show()
