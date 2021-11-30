@@ -3,7 +3,6 @@ package ciaran.malone.ca2mobileapp.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ciaran.malone.ca2mobileapp.R
 import ciaran.malone.ca2mobileapp.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
