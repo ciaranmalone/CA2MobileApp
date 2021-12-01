@@ -9,70 +9,54 @@
     >
 
 
-    <EditText
-        android:id="@+id/scoreInputField"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_above="@+id/nameInputField"
-        android:layout_marginBottom="70dp"
-        android:autofillHints="hint"
-        android:hint="Score"
-        android:inputType="text"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/nameInputField"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/nameInputField"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_above="@+id/submitScoreButton"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="71dp"
-        android:autofillHints="hint"
-        android:hint="Score"
-        android:inputType="text"
-        android:maxLength="25"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/submitScoreButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImage"
+        android:layout_width="194dp"
+        android:layout_height="174dp"
+        android:layout_above="@+id/StartButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="22dp"
+        android:gravity="center"
+        android:src="@drawable/banana_dance" />
 
     <Button
-        android:id="@+id/submitScoreButton"
+        android:id="@+id/StartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="213dp"
+        android:text="START" />
+
+    <TextView
+        android:id="@+id/RotationCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginBottom="102dp"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="130dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="597dp"
+        android:text="SPEEN"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="48sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/speen_square"
+        android:id="@+id/TimerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F44336"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:text="TextView"
-        android:layout_centerInParent="true"/>
-
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="189dp"
+        android:layout_marginBottom="90dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="48sp"
+        android:textStyle="bold" />
 </RelativeLayout>
 
