@@ -75,7 +75,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     private fun setUpSensor(){
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
-        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also {
+        sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION)?.also {
             sensorManager.registerListener(this,
                 it,
                 SensorManager.SENSOR_DELAY_FASTEST,
@@ -84,6 +84,22 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
+
+        val yRotation = event?.values?.get(0);
+//        square.text = "${((180/Math.PI) * yRotation!!).toInt()}"
+        square.text = "$yRotation"
+        square.apply {
+            if (yRotation != null) {
+                rotation = -yRotation
+            }
+        }
+
+        if(event?.sensor?.type == Sensor.TYPE_ORIENTATION)
+        {
+            i("DEBUG MESSAGE -> SPEEN ${event.values[0]}")
+
+        }
+
         if(event?.sensor?.type == Sensor.TYPE_ACCELEROMETER){
             val sides = event.values[0]
             val upDown = event.values[1]
@@ -99,16 +115,10 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             val color = if (upDown.toInt() == 0 && sides.toInt() ==0) Color.GREEN else Color.RED
             square.setBackgroundColor(color)
 
-            square.text = "u/down ${upDown.toInt()}\nleft/right ${sides.toInt()}"
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         return
-    }
-
-    override fun onDestroy() {
-        sensorManager.unregisterListener(this)
-        super.onDestroy()
     }
 }
