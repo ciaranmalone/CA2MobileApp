@@ -33,7 +33,6 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     var playerScore = ScoreModel()
     lateinit var app : MainApp
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -80,13 +79,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 //        }
     }
 
-    private fun getDate(): String {
-        val c: Date = Calendar.getInstance().time
-        println("Current time => $c")
 
-        val df = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
-        return df.format(c)
-    }
 
     private fun setUpSensor(){
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
@@ -106,6 +99,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     var timerStarted = false
 
+    var startingXRotation = 0f;
+
     override fun onSensorChanged(event: SensorEvent?) {
 
         if (!timerStarted)
@@ -114,6 +109,9 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         val xRotation = event?.values?.get(0);
         val yRotation = event?.values?.get(1);
         val zRotation = event?.values?.get(2);
+
+        if (startingXRotation == 0f)
+            startingXRotation = xRotation!!
 
         if (xRotation != null) {
 
@@ -149,7 +147,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             textCounter.text = "$rotationCount"
             square.apply {
 
-                rotation = xRotation + 130
+                rotation = xRotation - startingXRotation
                 rotationX = yRotation!!
                 rotationY= zRotation!!
 
@@ -163,15 +161,15 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     }
 
     //TIMER
-
     val timer = object: CountDownTimer(6000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             TimeCounter.text = (millisUntilFinished/1000).toString()
         }
 
         override fun onFinish() {
-
+            val intent = Intent(this@GameActivity, ShowScoreActivity::class.java)
+            intent.putExtra("score", rotationCount)
+            startActivity(intent)
         }
     }
-
 }

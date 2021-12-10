@@ -14,10 +14,15 @@ class HomeActivity : AppCompatActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.setTitle("Sonic fan app")
+        supportActionBar?.title = "SPEEN GAME"
 
         binding.imageButton.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.highscoreButton.setOnClickListener {
+            val intent = Intent(this, ScoreBoardActivity::class.java)
             startActivity(intent)
         }
     }

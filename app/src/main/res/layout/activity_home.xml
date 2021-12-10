@@ -10,40 +10,42 @@
         android:id="@+id/imageButton"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="136dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_media_play"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImage"
-        android:layout_width="418dp"
-        android:layout_height="738dp"
-        android:src="@drawable/noloop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:srcCompat="@drawable/banana_dance" />
 
     <TextView
         android:id="@+id/titleText"
-        android:layout_width="284dp"
-        android:layout_height="111dp"
+        android:layout_width="294dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="112dp"
         android:rotationX="23"
         android:text="@string/textview"
         android:textAlignment="center"
-        android:textColor="@color/teal_200"
-        android:textSize="34sp"
+        android:textAllCaps="true"
+        android:textColor="@color/purple_500"
+        android:textSize="60sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Speen" />
+
+    <Button
+        android:id="@+id/highscoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
+        android:text="Highscore"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Thats no Good" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

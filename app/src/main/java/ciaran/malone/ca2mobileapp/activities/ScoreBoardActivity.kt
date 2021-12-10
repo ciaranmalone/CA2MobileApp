@@ -31,7 +31,7 @@ class ScoreBoardActivity : AppCompatActivity() {
 
 class ScoreAdaptor constructor(private var scoreboard: List<ScoreModel>) : RecyclerView.Adapter<ScoreAdaptor.MainHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScoreAdaptor.MainHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardScoreboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MainHolder(binding)

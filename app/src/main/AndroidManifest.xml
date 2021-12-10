@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CA2MobileApp">
         <activity
+            android:name=".activities.ShowScoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ScoreBoardActivity"
             android:exported="false" />
         <activity
