@@ -17,7 +17,7 @@ import ciaran.malone.ca2mobileapp.models.ScoreModel
 
 private lateinit var binding: ActivityScoreBoardBinding
 
-class ScoreBoardActivity : AppCompatActivity() {
+class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
 
     lateinit var app: MainApp
 
@@ -32,7 +32,7 @@ class ScoreBoardActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = ScoreAdaptor(app.scoreBoard)
+        binding.recyclerView.adapter = ScoreAdaptor(app.scoreBoard.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,9 +52,23 @@ class ScoreBoardActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onScoreClick(score: ScoreModel) {
+        val launcherIntent = Intent(this, ShowScoreActivity::class.java)
+        launcherIntent.putExtra("score_edit", score)
+        startActivityForResult(launcherIntent,0)
+    }
+
 }
 
-class ScoreAdaptor constructor(private var scoreboard: List<ScoreModel>) : RecyclerView.Adapter<ScoreAdaptor.MainHolder>() {
+interface ScoreListener {
+    fun onScoreClick(score: ScoreModel)
+}
+
+class ScoreAdaptor (private var scoreboard: List<ScoreModel>,
+                   private val listener: ScoreListener
+) :
+    RecyclerView.Adapter<ScoreAdaptor.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardScoreboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -64,16 +78,17 @@ class ScoreAdaptor constructor(private var scoreboard: List<ScoreModel>) : Recyc
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val playerScore = scoreboard[holder.adapterPosition]
-        holder.bind(playerScore)
+        holder.bind(playerScore, listener)
     }
 
     override fun getItemCount(): Int = scoreboard.size
 
     class MainHolder(private val binding: CardScoreboardBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(playerScore: ScoreModel) {
+
+        fun bind(playerScore: ScoreModel, listener: ScoreListener) {
             binding.playerScore.text = playerScore.Score
             binding.playerName.text = playerScore.Name
-
+            binding.root.setOnClickListener { listener.onScoreClick(playerScore)}
         }
     }
 }

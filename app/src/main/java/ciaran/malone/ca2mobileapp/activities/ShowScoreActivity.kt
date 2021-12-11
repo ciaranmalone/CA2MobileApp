@@ -20,18 +20,37 @@ class ShowScoreActivity : AppCompatActivity() {
     private var playerScore = ScoreModel()
     lateinit var app : MainApp
 
+    private var score = ""
+    private var date = ""
+
+    var edit = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         app = application as MainApp
-        var score = intent.extras?.getInt("score").toString();
 
         binding = ActivityShowScoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         textScore = binding.ScoreTextView
-        textScore.text = score
 
+
+        if(intent.hasExtra("score_edit")) {
+            edit = true
+            playerScore = intent.extras?.getParcelable("score_edit")!!
+            binding.nameTextField.setText(playerScore.Name)
+            score = playerScore.Score
+            date = playerScore.Date
+        }
+        else
+        {
+            score = intent.extras?.getInt("score").toString();
+            date = getDate()
+        }
+
+        textScore.text = score
+        
         binding.submitScoreButton.setOnClickListener {
 
             val nameText = binding.nameTextField.text.toString()
@@ -39,13 +58,19 @@ class ShowScoreActivity : AppCompatActivity() {
             if (nameText.isNotEmpty() ) {
                 playerScore.Score = score
                 playerScore.Name = nameText
-                playerScore.Date = getDate()
+                playerScore.Date = date
 
-                app.scoreBoard.add(playerScore.copy())
+                if (edit) {
+                    app.scoreBoard.update(playerScore.copy())
+                } else {
+                    app.scoreBoard.create(playerScore.copy())
+                }
+
                 i("DEBUG_MESSAGE -> Added :  $playerScore")
 
                 val intent = Intent(this, ScoreBoardActivity::class.java)
                 startActivity(intent)
+                finish()
                 i("DEBUG_MESSAGE -> Added :  $playerScore")
             }
             else {
