@@ -19,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import pl.droidsonroids.gif.GifImageView
 import java.util.*
 import timber.log.Timber.i
-
+import ciaran.malone.ca2mobileapp.SoundPlayer;
 
 class GameActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var binding: ActivityGameBinding
@@ -28,7 +28,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var square: GifImageView
     private lateinit var textCounter: TextView
     private lateinit var TimeCounter: TextView
-
+    private lateinit var soundPlayer: SoundPlayer;
 
     var playerScore = ScoreModel()
     lateinit var app : MainApp
@@ -38,10 +38,15 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        soundPlayer = SoundPlayer (this);
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+//SETUP BINDINGS
         square = binding.gifImage
         textCounter = binding.RotationCount
         TimeCounter = binding.TimerView
+
         setUpSensor()
         app = application as MainApp
 
@@ -50,37 +55,14 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         binding.StartButton.setOnClickListener {
             if(!timerStarted) {
                 timer.start()
+                soundPlayer.playSpinSound();
+
                 timerStarted = true
             }
         }
-
-//        binding.submitScoreButton.setOnClickListener {
-//            i("DEBUG_MESSAGE -> BUTTON PRESSED")
-//
-//            val scoreText = binding.scoreInputField.text.toString()
-//            val nameText = binding.nameInputField.text.toString()
-//            if (scoreText.isNotEmpty() and nameText.isNotEmpty() ) {
-//                playerScore.Score = scoreText
-//                playerScore.Name = nameText
-//                playerScore.Date = getDate()
-//
-//                app.scoreBoard.add(playerScore.copy())
-//
-//                val intent = Intent(this, ScoreBoardActivity::class.java)
-//                startActivity(intent)
-//                i("DEBUG_MESSAGE -> Added :  $playerScore")
-//            }
-//            else {
-//                i("DEBUG_MESSAGE -> WRONG WRONG WRONG")
-//                Snackbar
-//                    .make(it, "YOu gotta Enter Somthing", Snackbar.LENGTH_LONG)
-//                    .show()
-//            }
-//        }
     }
 
-
-
+//GEO SETUP
     private fun setUpSensor(){
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
@@ -101,6 +83,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
     var startingXRotation = 0f;
 
+    //SPIN CALCULATIONS
     override fun onSensorChanged(event: SensorEvent?) {
 
         if (!timerStarted)
@@ -142,6 +125,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
                 rotationFlag2 = false
                 rotationFlag3 = false
                 rotationFlag4 = false
+
+                soundPlayer.playTickSound();
             }
 
             textCounter.text = "$rotationCount"
@@ -153,7 +138,6 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
 
             }
         }
-
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -170,6 +154,8 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
             val intent = Intent(this@GameActivity, ShowScoreActivity::class.java)
             intent.putExtra("score", rotationCount)
             startActivity(intent)
+
+            finish()
         }
     }
 }
