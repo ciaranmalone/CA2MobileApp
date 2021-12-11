@@ -1,12 +1,9 @@
 package ciaran.malone.ca2mobileapp.activities
 import android.content.Intent
-import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -15,11 +12,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import ciaran.malone.ca2mobileapp.databinding.ActivityGameBinding
 import ciaran.malone.ca2mobileapp.main.MainApp
 import ciaran.malone.ca2mobileapp.models.ScoreModel
-import com.google.android.material.snackbar.Snackbar
 import pl.droidsonroids.gif.GifImageView
 import java.util.*
 import timber.log.Timber.i
-import ciaran.malone.ca2mobileapp.SoundPlayer;
+import ciaran.malone.ca2mobileapp.helpers.SoundPlayer;
 
 class GameActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var binding: ActivityGameBinding
@@ -38,7 +34,7 @@ class GameActivity : AppCompatActivity(), SensorEventListener {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        soundPlayer = SoundPlayer (this);
+        soundPlayer = SoundPlayer(this);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 

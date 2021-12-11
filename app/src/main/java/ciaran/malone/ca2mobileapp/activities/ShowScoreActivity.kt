@@ -50,7 +50,7 @@ class ShowScoreActivity : AppCompatActivity() {
         }
 
         textScore.text = score
-        
+
         binding.submitScoreButton.setOnClickListener {
 
             val nameText = binding.nameTextField.text.toString()

@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ciaran.malone.ca2mobileapp.R
@@ -16,7 +18,7 @@ import ciaran.malone.ca2mobileapp.main.MainApp
 import ciaran.malone.ca2mobileapp.models.ScoreModel
 
 private lateinit var binding: ActivityScoreBoardBinding
-
+private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
 class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
 
     lateinit var app: MainApp
@@ -33,6 +35,10 @@ class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = ScoreAdaptor(app.scoreBoard.findAll(),this)
+
+        loadScoreboard()
+        registerRefreshCallback()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,6 +65,19 @@ class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
         startActivityForResult(launcherIntent,0)
     }
 
+    private fun loadScoreboard() {
+        showScoreboard(app.scoreBoard.findAll())
+    }
+
+    private fun showScoreboard(scoreboard: List<ScoreModel>) {
+        binding.recyclerView.adapter = ScoreAdaptor(scoreboard, this)
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { loadScoreboard() }
+    }
 }
 
 interface ScoreListener {

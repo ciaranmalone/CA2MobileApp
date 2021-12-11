@@ -27,6 +27,15 @@ class ScoreboardMemStore: ScoreBoardStore {
         }
     }
 
+    override fun delete(score: ScoreModel) {
+        var foundScore: ScoreModel? = scoreboard.find { p -> p.id == score.id }
+        if (foundScore != null) {
+            scoreboard.remove(foundScore)
+            logAll()
+        }
+    }
+
+
     private fun logAll() {
         scoreboard.forEach{ i("$it")}
     }

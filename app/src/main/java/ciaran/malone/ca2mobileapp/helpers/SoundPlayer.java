@@ -1,10 +1,12 @@
-package ciaran.malone.ca2mobileapp;
+package ciaran.malone.ca2mobileapp.helpers;
 
 import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+
+import ciaran.malone.ca2mobileapp.R;
 
 public class SoundPlayer {
 
