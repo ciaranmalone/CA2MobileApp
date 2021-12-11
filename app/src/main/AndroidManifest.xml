@@ -18,6 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.GameActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activities.HomeActivity"

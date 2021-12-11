@@ -1,17 +1,22 @@
 package ciaran.malone.ca2mobileapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ciaran.malone.ca2mobileapp.R
 import ciaran.malone.ca2mobileapp.databinding.ActivityScoreBoardBinding
 import ciaran.malone.ca2mobileapp.databinding.CardScoreboardBinding
 import ciaran.malone.ca2mobileapp.main.MainApp
 import ciaran.malone.ca2mobileapp.models.ScoreModel
 
 private lateinit var binding: ActivityScoreBoardBinding
+
 class ScoreBoardActivity : AppCompatActivity() {
 
     lateinit var app: MainApp
@@ -21,11 +26,31 @@ class ScoreBoardActivity : AppCompatActivity() {
         binding = ActivityScoreBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbar.title = title
+
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = ScoreAdaptor(app.scoreBoard)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_add -> {
+                val launcherIntent = Intent(this, HomeActivity::class.java)
+                startActivityForResult(launcherIntent,0)
+            }
+        }
+        finish();
+
+        return super.onOptionsItemSelected(item)
     }
 }
 

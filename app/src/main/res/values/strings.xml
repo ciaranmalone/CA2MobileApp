@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Sonic Fan App</string>
-    <string name="textview">That\'s no Good</string>
+    <string name="app_name">SPEEN GAME</string>
+    <string name="textview">WELCOME</string>
+    <string name="menu_button">Add</string>
 </resources>
