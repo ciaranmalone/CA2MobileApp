@@ -40,8 +40,8 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
 
     override fun findIndex(score: ScoreModel): String {
 
-        var count = scoreboard.indexOf(score)
-        return "#$count+1"
+        var count = (scoreboard.indexOf(score))+1
+        return "#$count"
     }
 
     override fun create(score: ScoreModel) {
