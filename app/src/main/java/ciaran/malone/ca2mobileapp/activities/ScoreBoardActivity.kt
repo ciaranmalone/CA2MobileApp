@@ -19,16 +19,15 @@ import ciaran.malone.ca2mobileapp.models.ScoreModel
 
 private lateinit var binding: ActivityScoreBoardBinding
 private lateinit var refreshIntentLauncher : ActivityResultLauncher<Intent>
+lateinit var app: MainApp
+
 class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
 
-    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScoreBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.toolbar.title = title
 
         app = application as MainApp
 
@@ -105,8 +104,10 @@ class ScoreAdaptor (private var scoreboard: List<ScoreModel>,
     class MainHolder(private val binding: CardScoreboardBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(playerScore: ScoreModel, listener: ScoreListener) {
-            binding.playerScore.text = playerScore.Score
-            binding.playerName.text = playerScore.Name
+            binding.scoreText.text = playerScore.Score
+            binding.nameText.text = playerScore.Name
+            binding.textDate.text = playerScore.Date
+            binding.textNumber.text = app.scoreBoard.findIndex(playerScore)
             binding.root.setOnClickListener { listener.onScoreClick(playerScore)}
         }
     }

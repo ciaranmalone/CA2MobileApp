@@ -5,7 +5,9 @@ import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import ciaran.malone.ca2mobileapp.databinding.ActivityShowScoreBinding
 import ciaran.malone.ca2mobileapp.main.MainApp
 import ciaran.malone.ca2mobileapp.models.ScoreModel
@@ -35,6 +37,8 @@ class ShowScoreActivity : AppCompatActivity() {
 
         textScore = binding.ScoreTextView
 
+        binding.deleteButton.visibility = View.INVISIBLE
+        binding.editText.visibility = View.INVISIBLE
 
         if(intent.hasExtra("score_edit")) {
             edit = true
@@ -42,11 +46,22 @@ class ShowScoreActivity : AppCompatActivity() {
             binding.nameTextField.setText(playerScore.Name)
             score = playerScore.Score
             date = playerScore.Date
+
+            binding.deleteButton.visibility = View.VISIBLE
+            binding.editText.visibility = View.VISIBLE
         }
         else
         {
             score = intent.extras?.getInt("score").toString();
             date = getDate()
+        }
+
+        binding.deleteButton.setOnClickListener {
+            app.scoreBoard.delete(playerScore)
+
+            val intent = Intent(this, ScoreBoardActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         textScore.text = score

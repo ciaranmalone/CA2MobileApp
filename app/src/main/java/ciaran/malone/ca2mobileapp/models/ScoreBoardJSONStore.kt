@@ -34,12 +34,20 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
 
     override fun findAll(): List<ScoreModel> {
         logAll()
+        orderList()
         return scoreboard
+    }
+
+    override fun findIndex(score: ScoreModel): String {
+
+        var count = scoreboard.indexOf(score)
+        return "#$count+1"
     }
 
     override fun create(score: ScoreModel) {
         score.id = generateRandomId()
         scoreboard.add(score)
+        orderList()
         serialize()
     }
 
@@ -48,6 +56,7 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
         if (foundScore != null) {
             foundScore.Name = score.Name
             logAll()
+            orderList()
             serialize()
 
         }
@@ -55,6 +64,7 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
 
     override fun delete(score: ScoreModel) {
         scoreboard.remove(score)
+        orderList()
         serialize()
     }
 
@@ -70,6 +80,10 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
 
     private fun logAll() {
         scoreboard.forEach { Timber.i("$it") }
+    }
+
+    private fun orderList() {
+        scoreboard.sortByDescending { scoreboard -> scoreboard.Score }
     }
 
 }

@@ -5,4 +5,5 @@ interface ScoreBoardStore {
     fun create(score: ScoreModel)
     fun update(score: ScoreModel)
     fun delete(score: ScoreModel)
+    fun findIndex(score: ScoreModel): String
 }

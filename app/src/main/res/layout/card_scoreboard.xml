@@ -1,31 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    android:elevation="24dp">
+    android:elevation="24dp"
+    app:cardBackgroundColor="@color/material_on_surface_stroke">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16px">
 
         <TextView
-            android:id="@+id/playerName"
+            android:id="@+id/score_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:textSize="30sp"
-            tools:text="A Title" />
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/textNumber"
+            android:text="5000"
+            android:textAlignment="textStart"
+            android:textColor="#2979FF"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/playerScore"
+            android:id="@+id/name_text"
+            android:layout_width="176dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/score_text"
+            android:text="Name"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="#2979FF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="9dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toEndOf="@+id/name_text"
+            android:text="16/06/1998"
+            android:textAlignment="center"
+            android:textColor="#2979FF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/playerName"
-            tools:text="A Description" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="3dp"
+            android:text="#1"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

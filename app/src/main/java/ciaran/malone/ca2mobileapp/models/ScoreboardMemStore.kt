@@ -35,6 +35,10 @@ class ScoreboardMemStore: ScoreBoardStore {
         }
     }
 
+    override fun findIndex(score: ScoreModel): String {
+        TODO("Not yet implemented")
+    }
+
 
     private fun logAll() {
         scoreboard.forEach{ i("$it")}

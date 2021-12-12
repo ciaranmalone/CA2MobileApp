@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">SPEEN GAME</string>
-    <string name="textview">WELCOME</string>
+    <string name="textview">SPEEN GAME</string>
     <string name="menu_button">Add</string>
+    <string name="your_score">Your Score</string>
+    <string name="edit_mode">Edit MODE</string>
+    <string name="score">Score</string>
+    <string name="submit">Submit</string>
+    <string name="delete">DELETE</string>
+    <string name="name">Name</string>
+    <string name="highscore">Highscore</string>
 </resources>
