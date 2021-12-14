@@ -9,11 +9,16 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import ciaran.malone.ca2mobileapp.databinding.ActivityShowScoreBinding
+import ciaran.malone.ca2mobileapp.helpers.SoundPlayer
+import ciaran.malone.ca2mobileapp.helpers.SoundPlayer.playApplauseSound
 import ciaran.malone.ca2mobileapp.main.MainApp
 import ciaran.malone.ca2mobileapp.models.ScoreModel
 import timber.log.Timber.i
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
+
+private lateinit var soundPlayer: SoundPlayer;
+
 
 class ShowScoreActivity : AppCompatActivity() {
     private lateinit var textScore: TextView
@@ -22,13 +27,15 @@ class ShowScoreActivity : AppCompatActivity() {
     private var playerScore = ScoreModel()
     lateinit var app : MainApp
 
-    private var score = ""
+    private var score = 0
     private var date = ""
 
     var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        playApplauseSound()
 
         app = application as MainApp
 
@@ -44,7 +51,7 @@ class ShowScoreActivity : AppCompatActivity() {
             edit = true
             playerScore = intent.extras?.getParcelable("score_edit")!!
             binding.nameTextField.setText(playerScore.Name)
-            score = playerScore.Score
+            score = playerScore.Score as Int
             date = playerScore.Date
 
             binding.deleteButton.visibility = View.VISIBLE
@@ -52,7 +59,7 @@ class ShowScoreActivity : AppCompatActivity() {
         }
         else
         {
-            score = intent.extras?.getInt("score").toString();
+            score = intent.extras?.getInt("score")!!;
             date = getDate()
         }
 
@@ -64,13 +71,13 @@ class ShowScoreActivity : AppCompatActivity() {
             finish()
         }
 
-        textScore.text = score
+        textScore.text = score.toString()
 
         binding.submitScoreButton.setOnClickListener {
 
             val nameText = binding.nameTextField.text.toString()
 
-            if (nameText.isNotEmpty() ) {
+            if (nameText.isNotEmpty() or (nameText.length < 8)) {
                 playerScore.Score = score
                 playerScore.Name = nameText
                 playerScore.Date = date
@@ -88,10 +95,15 @@ class ShowScoreActivity : AppCompatActivity() {
                 finish()
                 i("DEBUG_MESSAGE -> Added :  $playerScore")
             }
-            else {
-                i("DEBUG_MESSAGE -> WRONG WRONG WRONG")
+            else if (nameText.length < 12) {
                 Snackbar
-                    .make(it, "Name Please", Snackbar.LENGTH_LONG)
+                    .make(it, "NAME TOO LONG, 8 CHARS MAX", Snackbar.LENGTH_LONG)
+                    .show()
+            }
+            else
+            {
+                Snackbar
+                    .make(it, "NAME IS NEEDED", Snackbar.LENGTH_LONG)
                     .show()
             }
         }

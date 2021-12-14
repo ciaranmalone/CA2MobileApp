@@ -35,19 +35,23 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
     override fun findAll(): List<ScoreModel> {
         logAll()
         orderList()
-        return scoreboard
+        return scoreboard.sortedByDescending { it.Score }
     }
 
     override fun findIndex(score: ScoreModel): String {
 
-        var count = (scoreboard.indexOf(score))+1
+<<<<<<< Updated upstream
+        var count = scoreboard.indexOf(score)
+        return "#$count+1"
+=======
+        var count = (scoreboard.sortedByDescending{ it.Score }.indexOf(score))+1
         return "#$count"
+>>>>>>> Stashed changes
     }
 
     override fun create(score: ScoreModel) {
         score.id = generateRandomId()
         scoreboard.add(score)
-        orderList()
         serialize()
     }
 
@@ -56,15 +60,12 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
         if (foundScore != null) {
             foundScore.Name = score.Name
             logAll()
-            orderList()
             serialize()
-
         }
     }
 
     override fun delete(score: ScoreModel) {
         scoreboard.remove(score)
-        orderList()
         serialize()
     }
 
@@ -82,12 +83,10 @@ class ScoreBoardJSONStore(private val context: Context) : ScoreBoardStore {
         scoreboard.forEach { Timber.i("$it") }
     }
 
-    private fun orderList() {
-        scoreboard.sortByDescending { scoreboard -> scoreboard.Score }
+    private fun orderList(){
+        scoreboard.sortedByDescending { it.Score }
     }
-
 }
-
 
 class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
     override fun deserialize(

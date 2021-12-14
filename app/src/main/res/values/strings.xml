@@ -9,4 +9,6 @@
     <string name="delete">DELETE</string>
     <string name="name">Name</string>
     <string name="highscore">Highscore</string>
+    <string name="disclaimerTitle">DISCLAIMER</string>
+    <string name="disclaimer_text">USE APP AT OWN RISK. THE DEVELOPER IS NOT RESPONSIBLE FOR ANY DAMAGE DONE TO YOU OR YOUR PHONE</string>
 </resources>

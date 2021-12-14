@@ -12,7 +12,7 @@ public class SoundPlayer {
 
     private AudioAttributes audioAttributes;
     private static SoundPool soundPool;
-    private static int spinSound, tickSound;
+    private static int spinSound, tickSound, applauseSound;
 
     public SoundPlayer(Context context) {
 
@@ -32,6 +32,7 @@ public class SoundPlayer {
 
         spinSound = soundPool.load(context, R.raw.spin_sound,1);
         tickSound = soundPool.load(context, R.raw.tick, 1);
+        applauseSound = soundPool.load(context, R.raw.applause, 1);
     }
 
     public void playSpinSound() {
@@ -40,6 +41,10 @@ public class SoundPlayer {
 
     public void playTickSound() {
         soundPool.play(tickSound, 1f, 1f, 1, 0, 1f);
+    }
+
+    static public void playApplauseSound() {
+        soundPool.play(applauseSound, 1f, 1f, 1, 0, 1f);
     }
 
 }
