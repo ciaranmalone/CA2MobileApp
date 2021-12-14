@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    >
+    tools:context=".activities.MainActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifBackground"
@@ -21,6 +20,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="387dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="96dp"
+        android:rotationX="19"
+        android:text="@string/disclaimerTitle"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#B71C1C"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gifBackground" />
+
+    <TextView
+        android:id="@+id/disclaimerText"
+        android:layout_width="391dp"
+        android:layout_height="423dp"
+        android:text="@string/disclaimer_text"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#E91E63"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/gifBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.28" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

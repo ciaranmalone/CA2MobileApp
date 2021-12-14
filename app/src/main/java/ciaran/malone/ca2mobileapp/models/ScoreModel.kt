@@ -5,6 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ScoreModel(var id: Long = 0,
-                      var Score: String="",
+                      var Score: Int = 0,
                       var Name: String= "",
                       var Date: String =""): Parcelable

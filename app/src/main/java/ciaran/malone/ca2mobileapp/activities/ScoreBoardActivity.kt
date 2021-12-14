@@ -104,7 +104,7 @@ class ScoreAdaptor (private var scoreboard: List<ScoreModel>,
     class MainHolder(private val binding: CardScoreboardBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(playerScore: ScoreModel, listener: ScoreListener) {
-            binding.scoreText.text = playerScore.Score
+            binding.scoreText.text = playerScore.Score.toString()
             binding.nameText.text = playerScore.Name
             binding.textDate.text = playerScore.Date
             binding.textNumber.text = app.scoreBoard.findIndex(playerScore)
