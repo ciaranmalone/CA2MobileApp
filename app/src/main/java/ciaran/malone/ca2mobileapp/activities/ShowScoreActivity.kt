@@ -17,8 +17,6 @@ import timber.log.Timber.i
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
-private lateinit var soundPlayer: SoundPlayer;
-
 
 class ShowScoreActivity : AppCompatActivity() {
     private lateinit var textScore: TextView
@@ -34,8 +32,6 @@ class ShowScoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        playApplauseSound()
 
         app = application as MainApp
 
@@ -59,6 +55,7 @@ class ShowScoreActivity : AppCompatActivity() {
         }
         else
         {
+            playApplauseSound()
             score = intent.extras?.getInt("score")!!;
             date = getDate()
         }

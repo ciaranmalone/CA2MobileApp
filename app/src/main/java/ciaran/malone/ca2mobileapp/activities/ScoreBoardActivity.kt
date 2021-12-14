@@ -23,7 +23,6 @@ lateinit var app: MainApp
 
 class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScoreBoardBinding.inflate(layoutInflater)
@@ -53,7 +52,7 @@ class ScoreBoardActivity : AppCompatActivity(), ScoreListener {
                 startActivityForResult(launcherIntent,0)
             }
         }
-        finish();
+        finish()
 
         return super.onOptionsItemSelected(item)
     }

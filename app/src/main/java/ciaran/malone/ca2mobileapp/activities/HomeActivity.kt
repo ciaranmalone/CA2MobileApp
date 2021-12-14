@@ -21,7 +21,6 @@ class HomeActivity : AppCompatActivity(), SensorEventListener {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = "SPEEN GAME"
         playButton = binding.imageButton
 
         playButton.setOnClickListener {
